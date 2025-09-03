@@ -165,7 +165,7 @@ export default function Dashboard() {
                         </div>
                         <div className='flex w-full h-[235px] bg-white rounded-3xl xl:gap-8 gap-5 overflow-hidden'>
                             {/* card #1 */}
-                            <div className='relative flex flex-col w-[80%] md:w-1/2 h-full bg-gradient-to-r from-[#4C49ED] to-[#0A06F4] rounded-3xl p-5 shrink-0'>
+                            <div className='relative flex flex-col w-[80%] md:w-1/2 h-full bg-gradient-to-r from-[#4C49ED] to-[#0A06F4] rounded-3xl p-5 md:shrink shrink-0'>
                                 <div className='flex justify-between mb-7'>
                                     <div className='text-white'>
                                         <p className='text-xs'>Balance</p>
