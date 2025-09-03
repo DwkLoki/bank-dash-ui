@@ -20,6 +20,7 @@ import Link from 'next/link'
 import DashboardIcon from '@/assets/dashboard-icon.svg'
 import TransactionsIcon from '@/assets/transactions-icon.svg'
 import AccountsIcon from '@/assets/accounts-icon.svg'
+import WeeklyActivityMobile from '@/components/WeeklyActivityMobile'
 
 export default function Dashboard() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -159,13 +160,13 @@ export default function Dashboard() {
             <main className='xl:p-10 p-5 w-full'>
                 <section className='flex md:flex-row flex-col xl:gap-8 gap-5 w-full'>
                     <div className='flex md:w-[70%] w-full flex-col gap-3'>
-                        <div className='flex md:w-full w-[80%] justify-between items-center text-[#343C6A] font-semibold'>
+                        <div className='flex w-full justify-between items-center text-[#343C6A] font-semibold'>
                             <h2 className='md:text-[22px] text-base'>My Cards</h2>
                             <h2 className='md:text-[17px] text-sm cursor-pointer'>See All</h2>
                         </div>
-                        <div className='flex w-full h-[235px] bg-white rounded-3xl xl:gap-8 gap-5 overflow-hidden'>
+                        <div className='flex md:flex-row flex-col w-full md:h-[235px] h-auto bg-white rounded-3xl xl:gap-8 gap-5'>
                             {/* card #1 */}
-                            <div className='relative flex flex-col w-[80%] md:w-1/2 h-full bg-gradient-to-r from-[#4C49ED] to-[#0A06F4] rounded-3xl p-5 md:shrink shrink-0'>
+                            <div className='relative flex flex-col w-full md:w-1/2 h-[235px] bg-gradient-to-r from-[#4C49ED] to-[#0A06F4] rounded-3xl p-5'>
                                 <div className='flex justify-between mb-7'>
                                     <div className='text-white'>
                                         <p className='text-xs'>Balance</p>
@@ -190,7 +191,7 @@ export default function Dashboard() {
                             </div>
 
                             {/* card #2 */}
-                            <div className='relative flex flex-col w-[80%] md:w-1/2 h-full bg-white border border-[#DFEAF2] rounded-3xl p-5'>
+                            <div className='relative flex flex-col w-full md:w-1/2 h-[235px] bg-white border border-[#DFEAF2] rounded-3xl p-5'>
                                 <div className='flex justify-between mb-7'>
                                     <div>
                                         <p className='text-xs text-[#718EBF]'>Balance</p>
@@ -216,35 +217,35 @@ export default function Dashboard() {
                         </div>
                     </div>
                     <div className='flex md:w-[30%] w-full flex-col gap-3'>
-                        <h2 className='text-[22px] font-semibold text-[#343C6A]'>Recent Transaction</h2>
-                        <div className='flex flex-col justify-between w-full h-full bg-white rounded-3xl p-5'>
-                            <div className='flex items-center gap-2'>
+                        <h2 className='md:text-[22px] text-base font-semibold text-[#343C6A]'>Recent Transaction</h2>
+                        <div className='flex flex-col md:gap-0 gap-5 justify-between w-full h-full bg-white rounded-3xl p-5'>
+                            <div className='flex items-center md:gap-2 gap-4'>
                                 <CardDepositLogo className='xl:h-[55px] xl:w-[55px] h-[40px] w-[40px]' />
                                 <div className='flex-1 flex justify-between items-center'>
                                     <div>
-                                        <p className='text-xs font-semibold'>Deposit from my Card</p>
+                                        <p className='md:text-xs text-sm font-semibold'>Deposit from my Card</p>
                                         <p className='text-xs text-[#718EBF]'>28 January 2021</p>
                                     </div>
                                     <p className='xl:text-sm text-xs text-[#FF4B4A]'>-$850</p>
                                 </div>
                             </div>
 
-                            <div className='flex items-center gap-2'>
+                            <div className='flex items-center md:gap-2 gap-4'>
                                 <CardDepositLogo className='xl:h-[55px] xl:w-[55px] h-[40px] w-[40px]' />
                                 <div className='flex-1 flex justify-between items-center'>
                                     <div>
-                                        <p className='text-xs font-semibold'>Deposit Paypal</p>
+                                        <p className='md:text-xs text-sm font-semibold'>Deposit Paypal</p>
                                         <p className='text-xs text-[#718EBF]'>25 January 2021</p>
                                     </div>
                                     <p className='xl:text-sm text-xs text-[#41D4A8]'>+$2,500</p>
                                 </div>
                             </div>
 
-                            <div className='flex items-center gap-2'>
+                            <div className='flex items-center md:gap-2 gap-4'>
                                 <CardDepositLogo className='xl:h-[55px] xl:w-[55px] h-[40px] w-[40px]' />
                                 <div className='flex-1 flex justify-between items-center'>
                                     <div>
-                                        <p className='text-xs font-semibold'>Jemi Wilson</p>
+                                        <p className='md:text-xs text-sm font-semibold'>Jemi Wilson</p>
                                         <p className='text-xs text-[#718EBF]'>21 January 2021</p>
                                     </div>
                                     <p className='xl:text-sm text-xs text-[#41D4A8]'>+$5,400</p>
@@ -254,24 +255,30 @@ export default function Dashboard() {
                     </div>
                 </section>
 
-                <section className='flex xl:gap-8 gap-5 w-full mt-8'>
-                    <div className='flex w-[70%] flex-col gap-3'>
-                        <h2 className='text-[22px] font-semibold text-[#343C6A]'>Weekly Activity</h2>
-                        <div className='w-full h-[322px] bg-white rounded-3xl p-7'>
+                <section className='flex md:flex-row flex-col xl:gap-8 gap-5 w-full mt-8'>
+                    <div className='flex md:w-[70%] w-full flex-col gap-3'>
+                        <h2 className='md:text-[22px] text-base font-semibold text-[#343C6A]'>Weekly Activity</h2>
+                        {/* chart untuk dekstop */}
+                        <div className='hidden md:block w-full h-[322px] bg-white rounded-3xl p-7'>
                             <WeeklyActivityChart />
                         </div>
+
+                        {/* chart untuk mobile */}
+                        <div className='md:hidden w-full h-[250px] bg-white rounded-3xl p-3'>
+                            <WeeklyActivityMobile />
+                        </div>
                     </div>
-                    <div className='flex w-[30%] flex-col gap-3'>
-                        <h2 className='text-[22px] font-semibold text-[#343C6A]'>Expense Statistics</h2>
-                        <div className='w-full h-full bg-white rounded-3xl'>
+                    <div className='flex md:w-[30%] w-full flex-col gap-3'>
+                        <h2 className='md:text-[22px] text-base font-semibold text-[#343C6A]'>Expense Statistics</h2>
+                        <div className='w-full md:h-full h-[250px] bg-white rounded-3xl'>
                             <ExpensePieChart />
                         </div>
                     </div>
                 </section>
 
-                <section className='flex xl:gap-8 gap-5 w-full mt-8'>
-                    <div className='flex w-[40%] flex-col gap-3'>
-                        <h2 className='text-[22px] font-semibold text-[#343C6A]'>Quick Transfer</h2>
+                <section className='flex md:flex-row flex-col xl:gap-8 gap-5 w-full mt-8'>
+                    <div className='flex md:w-[40%] w-full flex-col gap-3'>
+                        <h2 className='md:text-[22px] text-base font-semibold text-[#343C6A]'>Quick Transfer</h2>
                         <div className='flex flex-col w-full h-full justify-center text-xs bg-white rounded-3xl p-4'>
                             <div className='flex w-full justify-between mb-10'>
                                 <div className='flex xl:gap-7 gap-4'>
@@ -334,8 +341,8 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    <div className='flex w-[60%] flex-col gap-3'>
-                        <h2 className='text-[22px] font-semibold text-[#343C6A]'>Balance History</h2>
+                    <div className='flex md:w-[60%] w-full flex-col gap-3'>
+                        <h2 className='md:text-[22px] text-base font-semibold text-[#343C6A]'>Balance History</h2>
                         <div className='w-full h-[220px] bg-white rounded-3xl p-4'>
                             <BalanceHistoryChart />
                         </div>
