@@ -14,7 +14,7 @@ import ChipCardGrey from '@/assets/chip-card-grey.svg'
 import CardLogo from '@/assets/card-logo.svg'
 import CardDepositLogo from '@/assets/card-deposit-logo.svg'
 import { AlignJustify, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from "next/navigation";
 import Link from 'next/link'
 import DashboardIcon from '@/assets/dashboard-icon.svg'
@@ -25,6 +25,18 @@ import WeeklyActivityMobile from '@/components/WeeklyActivityMobile'
 export default function Dashboard() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const pathname = usePathname()
+
+    // non aktifkan scroll saat menu terbuka
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = "hidden"
+        } else {
+            document.body.style.overflow = "auto"
+        }
+        return () => {
+            document.body.style.overflow = "auto"
+        }
+    }, [isMenuOpen])
 
     return (
         <div className='bg-[#F5F7FA] w-full'>
@@ -68,7 +80,7 @@ export default function Dashboard() {
                 <div className='flex justify-between items-center'>
                     <button
                         onClick={() => setIsMenuOpen(prev => !prev)}
-                        className='md:hidden relative w-8 h-8 flex items-center justify-center'
+                        className='relative w-8 h-8 flex items-center justify-center'
                     >
                         {/* Icon Menu */}
                         <span
@@ -111,21 +123,32 @@ export default function Dashboard() {
             {/* toggle menu pada tampilan mobile */}
             <div
                 className={`
-                    md:hidden w-screen overflow-hidden transition-all duration-500 ease-in-out
-                    ${isMenuOpen ? 'h-[calc(100vh-80px)] opacity-100' : 'h-0 opacity-0'}
+                    fixed top-0 left-0 h-screen w-screen bg-white z-50
+                    transform transition-transform duration-500 ease-in-out
+                    ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}
                 `}
             >
-                <nav className="w-[20%] shrink-0 bg-white border-r border-r-[#E6EFF5]">
-                    <div className="flex justify-center items-center xl:h-[100px] h-[85px]">
+                <nav>
+                    <div className='flex justify-between items-center p-7'>
                         <Image
                             src='/logo.svg'
                             alt="Bank Dash Logo"
                             width={183}
                             height={36}
-                            className="w-[70%]"
                         />
+
+                        <button
+                            onClick={() => setIsMenuOpen(prev => !prev)}
+                            className='w-8 h-8 flex items-center justify-center'
+                        >
+                            {/* Icon Close */}
+                            <span>
+                                <X size={24} strokeWidth={2} color="#2C448C" />
+                            </span>
+                        </button>
                     </div>
-                    <div className="py-2 text-lg font-medium">
+
+                    <div className="text-lg font-medium">
                         <Link
                             href='/'
                             className={`h-[60px] flex items-center xl:pl-10 pl-6 space-x-5 ${pathname === '/' ? 'border-l-4 text-[#2D60FF]' : 'border-l-4 border-l-white text-[#B1B1B1]'}`}
